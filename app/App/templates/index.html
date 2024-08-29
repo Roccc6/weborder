@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乐器购买</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+
+<div class="header">
+    <a href="{{ url_for('bp.logout') }}" class="logout-button">登出</a>
+</div>
+
+<div class="product-container">
+    <h1>乐器购买</h1>
+    
+    {% for product in products %}
+    <div class="product-item">
+        <a href="{{ url_for('bp.product_detail', product_id=product['ProductID']) }}">
+            <img src="{{ product['ImagePath'] }}" alt="{{ product['ProductName'] }}">
+        </a>
+        <div class="item-details">
+            <h2>{{ product['ProductName'] }}</h2>
+            <p>价格: ¥{{ product['Price'] }}</p>
+            <div class="quantity-controls">
+                <button class="btn-decrease">-</button>
+                <input type="text" value="1" readonly>
+                <button class="btn-increase">+</button>
+            </div>
+            <button class="btn-add-to-cart">添加到购物车</button>
+        </div>
+    </div>
+    {% endfor %}
+    
+</div>
+
+</body>
+</html>

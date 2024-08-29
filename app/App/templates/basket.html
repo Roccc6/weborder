@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <link rel="stylesheet" href="../static/css/basket.css">
+</head>
+<body>
+
+<div class="cart-container">
+    <h1>购物车</h1>
+    
+    <form action="/checkout" method="post">
+        <div class="cart-item">
+            <input type="checkbox" name="selected_items" value="guitar">
+            <img src="static/img/guitar.jpg" alt="Guitar">
+            <div class="item-details">
+                <h2>吉他</h2>
+                <p>数量: 1</p>
+            </div>
+            <div class="item-actions">
+                <button type="submit" formaction="/remove/guitar" class="btn-remove">移除</button>
+            </div>
+        </div>
+        
+        <div class="cart-item">
+            <input type="checkbox" name="selected_items" value="piano">
+            <img src="static/img/piano.jpg" alt="Piano">
+            <div class="item-details">
+                <h2>钢琴</h2>
+                <p>数量: 2</p>
+            </div>
+            <div class="item-actions">
+                <button type="submit" formaction="/remove/piano" class="btn-remove">移除</button>
+            </div>
+        </div>
+        
+        <div class="cart-summary">
+            <button type="submit" class="btn-checkout">结账</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

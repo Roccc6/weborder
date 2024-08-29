@@ -1,0 +1,86 @@
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    background-image: url('../static/img/instrument-background.jpg'); /* 使用乐器背景图片 */
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333; /* 文字颜色调整 */
+}
+
+.container {
+    width: 350px;
+    background-color: rgba(255, 255, 255, 0.9); /* 透明背景，突出内容 */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    text-align: center;
+}
+
+.logo {
+    color: #ff5733; /* 颜色与音乐、乐器相关 */
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: #555; /* 标题颜色 */
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.form-group input {
+    width: calc(100% - 40px);
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+}
+
+.form-group input:focus {
+    border-color: #ff5733; /* 聚焦时边框颜色 */
+}
+
+.form-group input:focus + i {
+    color: #ff5733;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff5733; /* 亮色按钮 */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #c13c1e; /* 按钮悬停时颜色 */
+}
+
+.error-msg {
+    color: #ff0000;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+}
