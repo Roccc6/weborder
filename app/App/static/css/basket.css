@@ -1,3 +1,57 @@
+/* 购物车容器 */
+.cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    margin-top: 30%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.cart-item img {
+    max-width: 150px;
+    margin-right: 20px;
+    border-radius: 8px;
+}
+
+.cart-total {
+    text-align: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.btn-checkout {
+    display: inline-block;
+    background-color: #ff6600;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-checkout:hover {
+    background-color: #e65c00;
+}
+
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
@@ -110,3 +164,118 @@ h1 {
 .btn-remove:hover {
     background-color: #c82333;
 }
+
+.custom-checkbox {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+    padding-left: 30px; /* 给复选框留出空间 */
+}
+
+.checkbox-input {
+    position: absolute;
+    opacity: 0; /* 隐藏实际的复选框 */
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-mark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 4px;
+    border: 2px solid #ccc;
+}
+
+/* 当用户点击复选框时的效果 */
+.custom-checkbox:hover .checkbox-mark {
+    background-color: #ccc;
+}
+
+/* 当复选框被选中时的效果 */
+.checkbox-input:checked + .checkbox-mark {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+/* 创建复选框内部的对勾 */
+.checkbox-mark::after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 8px;
+    height: 14px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* 当复选框被选中时显示对勾 */
+.checkbox-input:checked + .checkbox-mark::after {
+    display: block;
+}
+
+.item-actions {
+    text-align: right;
+}
+
+.cart-summary {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.cart-summary .btn-checkout, .btn-add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-summary .btn-checkout:hover, .btn-add-to-cart:hover {
+    background-color: #218838;
+}
+
+.btn-remove {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-remove:hover {
+    background-color: #c82333;
+}
+
+
+.header {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.logout-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.logout-button:hover {
+    background-color: #d32f2f;
+}
+

@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    alert('商品已成功添加到购物车!');
+                    alert(data.message);
                 } else {
                     alert('添加购物车失败: ' + data.message);
                 }

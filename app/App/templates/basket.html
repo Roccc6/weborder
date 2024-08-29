@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>购物车</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="shortcut icon" href="../static/imgages/乐器.png" type="image/x-icon">
     <link rel="stylesheet" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/css/basket.css">
 </head>
 <body>
 
@@ -16,30 +19,40 @@
 <div class="cart-container">
     <h1>购物车</h1>
     
-    {% if cart %}
-        {% set total = 0 %}
-        {% for item in cart %}
-        {% set subtotal = item['Price'] * item['Quantity'] %}
-        {% set total = total + subtotal %}
+    <form id="cart-form" method="POST" >
+        {% if cart %}
+            {% for item in cart %}
+                {% set subtotal = item['Price'] * item['Quantity'] %}
+                {% set total_weight = item['ShippingWeight'] * item['Quantity'] %}
 
-        <div class="cart-item">
-            <img src="{{ item['ImagePath'] }}" alt="{{ item['ProductName'] }}">
-            <div class="item-details">
-                <h2>{{ item['ProductName'] }}</h2>
-                <p>价格: ¥{{ item['Price'] }}</p>
-                <p>数量: {{ item['Quantity'] }}</p>
-                <p>小计: ¥{{ item['Price'] * item['Quantity'] }}</p>
+                <div class="cart-item">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" class="checkbox-input">
+                        <span class="checkbox-mark" id = "{{ item['ProductID'] }}"></span>
+                    </label>
+                        
+                    <img src="{{ item['ImagePath'] }}" alt="{{ item['ProductName'] }}">
+                    <div class="item-details">
+                        <h2>{{ item['ProductName'] }}</h2>
+                        <p>价格: ¥{{ item['Price'] }}</p>
+                        <p>数量: {{ item['Quantity'] }}</p>
+                        <p>重量: {{ item['ShippingWeight'] }} kg</p>
+                        <p>小计: ¥{{ subtotal }}</p>
+                        <p>总重: {{ total_weight }} kg</p>
+                    </div>
+                </div>                
+            {% endfor %}
+            <div class="cart-total">
+                <h3>总计: ¥{{ total }}</h3>
+                <h3>总重: {{ wholeweight }} kg</h3>
+                <button  type="button" class="btn-remove">移除选中商品</button>
+                <button type="button" class="btn-checkout">结算选中商品</button>
             </div>
-        </div>
-        {% endfor %}
-        <div class="cart-total">
-            <h3>总计: ¥{{ total }}</h3>
-            <button class="btn-checkout">结算</button>
-        </div>
-    {% else %}
-        <p>你的购物车是空的。快去买点啥吧</p>
-    {% endif %}
+        {% else %}
+            <p>你的购物车是空的。快去买点啥吧</p>
+        {% endif %}
+    </form>
 </div>
-
+<script src="../static/js/basket.js"></script>
 </body>
 </html>

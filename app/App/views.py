@@ -66,7 +66,7 @@ def basket():
     user = session.get('username')
     cur = mysql.connection.cursor()
     # 查询user购物车中的商品
-    sql = '''select ProductName, Price, ImagePath, Quantity
+    sql = '''select product.ProductID,ProductName,ShippingWeight, Price, ImagePath, Quantity
     from useraccount join shoppingbasket on useraccount.UserID = shoppingbasket.UserID 
     join product on shoppingbasket.ProductID = product.ProductID 
     join productdetails on product.ProductID = productdetails.ProductID
@@ -76,7 +76,10 @@ def basket():
     products = cur.fetchall()
     for product in products:
         product['ImagePath'] = '../static' + product['ImagePath']
-    return render_template('basket.html',cart=products)
+        
+    total = sum(item['Price'] * item['Quantity'] for item in products)
+    total_weight = sum(item['ShippingWeight'] * item['Quantity'] for item in products)
+    return render_template('basket.html',cart=products, total=total,wholeweight=total_weight)
 
 
 
@@ -91,6 +94,12 @@ def add_to_basket():
         if not all([product_id, quantity]):
             return jsonify({'status': 'error', 'message': '参数不完整'}), 400
         cur = mysql.connection.cursor()
+        #检查是否存在该产品
+        sql = "select * from product where ProductID = %s"
+        cur.execute(sql, (product_id,))
+        product = cur.fetchone()
+        if not product:
+            return jsonify({'status': 'error', 'message': '商品不存在'}), 400
         # 查询用户购物车中是否已经有该商品
         sql = '''select * from useraccount join shoppingbasket on useraccount.UserID = shoppingbasket.UserID 
         where username = %s and productID = %s
@@ -103,6 +112,7 @@ def add_to_basket():
             where UserID = (select UserID from useraccount where username = %s) and ProductID = %s
             '''
             cur.execute(sql, (quantity, user, product_id))
+            return jsonify({'status': 'success', 'message': '商品数量已更新'}), 200
             
         # 如果购物车中没有该商品，则插入新的记录
         else:
@@ -110,8 +120,31 @@ def add_to_basket():
             values ((select UserID from useraccount where username = %s), %s, %s)
             '''
             cur.execute(sql, (user, product_id, quantity))
-            
             return jsonify({'status': 'success', 'message': '商品已成功添加到购物车'}), 200
     except:
         return jsonify({'msg': 'error'})
+    
+    
+@bp.route('/remove_from_basket', methods=['POST'])
+def remove_from_basket():
+    try:
+        user = session.get('username')
+        data = request.json
+        removearr = data.get('product_id')
+        cur = mysql.connection.cursor()
+        sql = '''delete from shoppingbasket where UserID = (select UserID from useraccount where username = %s) and ProductID = %s
+        '''
+        for product_id in removearr:
+            cur.execute(sql, (user, product_id))
+        
+        return jsonify({'status': 'success', 'message': '商品已成功从购物车移除'}), 200
+        
+    except:
+        return jsonify({'msg': 'error'})
+    
+    
+@bp.route('/checkout', methods=['POST'])
+def checkout():
+    pass
+
     
