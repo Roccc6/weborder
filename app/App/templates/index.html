@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>乐器购买</title>
     <link rel="stylesheet" href="../static/css/index.css">
+
 </head>
 <body>
 
 <div class="header">
     <a href="{{ url_for('bp.logout') }}" class="logout-button">登出</a>
+    <a href="{{ url_for('bp.basket') }}" class="cart-button">查看购物车</a>
 </div>
 
 <div class="product-container">
     <h1>乐器购买</h1>
     
     {% for product in products %}
-    <div class="product-item">
+    <div class="product-item" id="{{product['ProductID']}}">
         <a href="{{ url_for('bp.product_detail', product_id=product['ProductID']) }}">
             <img src="{{ product['ImagePath'] }}" alt="{{ product['ProductName'] }}">
         </a>
@@ -34,6 +36,6 @@
     {% endfor %}
     
 </div>
-
+<script src="../static/js/index.js"></script>
 </body>
 </html>

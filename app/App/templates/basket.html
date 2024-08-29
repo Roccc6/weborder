@@ -4,42 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>购物车</title>
-    <link rel="stylesheet" href="../static/css/basket.css">
+    <link rel="stylesheet" href="../static/css/index.css">
 </head>
 <body>
+
+<div class="header">
+    <a href="{{ url_for('bp.logout') }}" class="logout-button">登出</a>
+    <a href="{{ url_for('bp.index') }}" class="home-button">返回首页</a>
+</div>
 
 <div class="cart-container">
     <h1>购物车</h1>
     
-    <form action="/checkout" method="post">
+    {% if cart %}
+        {% set total = 0 %}
+        {% for item in cart %}
+        {% set subtotal = item['Price'] * item['Quantity'] %}
+        {% set total = total + subtotal %}
+
         <div class="cart-item">
-            <input type="checkbox" name="selected_items" value="guitar">
-            <img src="static/img/guitar.jpg" alt="Guitar">
+            <img src="{{ item['ImagePath'] }}" alt="{{ item['ProductName'] }}">
             <div class="item-details">
-                <h2>吉他</h2>
-                <p>数量: 1</p>
-            </div>
-            <div class="item-actions">
-                <button type="submit" formaction="/remove/guitar" class="btn-remove">移除</button>
-            </div>
-        </div>
-        
-        <div class="cart-item">
-            <input type="checkbox" name="selected_items" value="piano">
-            <img src="static/img/piano.jpg" alt="Piano">
-            <div class="item-details">
-                <h2>钢琴</h2>
-                <p>数量: 2</p>
-            </div>
-            <div class="item-actions">
-                <button type="submit" formaction="/remove/piano" class="btn-remove">移除</button>
+                <h2>{{ item['ProductName'] }}</h2>
+                <p>价格: ¥{{ item['Price'] }}</p>
+                <p>数量: {{ item['Quantity'] }}</p>
+                <p>小计: ¥{{ item['Price'] * item['Quantity'] }}</p>
             </div>
         </div>
-        
-        <div class="cart-summary">
-            <button type="submit" class="btn-checkout">结账</button>
+        {% endfor %}
+        <div class="cart-total">
+            <h3>总计: ¥{{ total }}</h3>
+            <button class="btn-checkout">结算</button>
         </div>
-    </form>
+    {% else %}
+        <p>你的购物车是空的。快去买点啥吧</p>
+    {% endif %}
 </div>
 
 </body>
