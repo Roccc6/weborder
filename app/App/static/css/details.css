@@ -76,3 +76,37 @@ body {
 .product-detail-container a:hover {
     color: #e65c00;
 }
+
+
+.product-reviews {
+    margin-top: 30px;
+}
+
+.product-reviews h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.review-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.review-item h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.review-item p {
+    margin: 5px 0;
+}
+
+.review-date {
+    font-size: 12px;
+    color: #888;
+}

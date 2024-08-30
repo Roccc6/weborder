@@ -45,8 +45,17 @@
             <div class="cart-total">
                 <h3>总计: ¥{{ total }}</h3>
                 <h3>总重: {{ wholeweight }} kg</h3>
+                <!-- 选择运输方式 -->
+                <div class="shipping-method">
+                    <label for="shipping">选择运输方式:</label>
+                    <select name="shipping" id="shipping">
+                        <option value="air">空运</option>
+                        <option value="ground">陆运</option>
+                    </select>
+                </div>
                 <button  type="button" class="btn-remove">移除选中商品</button>
-                <button type="button" class="btn-checkout">结算选中商品</button>
+                <button type="button" class="btn-empty">清空购物车</button>
+                <button type="button" class="btn-submit">提交订单</button>
             </div>
         {% else %}
             <p>你的购物车是空的。快去买点啥吧</p>

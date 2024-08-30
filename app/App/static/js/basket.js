@@ -1,10 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 获取移除按钮和结算按钮
     const removeButton = document.querySelector('.btn-remove');
-    const checkoutButton = document.querySelector('.btn-checkout');
-    if (!removeButton || !checkoutButton) {
-        return;
-    }
+    const submitButton = document.querySelector('.btn-submit');
+    const emptyButton = document.querySelector('.btn-empty');
+    // 监听清空购物车按钮点击事件
+    emptyButton.addEventListener('click', function() {
+        if (confirm('你确定要清空购物车吗？')) {
+            fetch('/empty_basket', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert(data.message);
+                    // 延迟移除
+                    setTimeout(function() {
+                        window.location.reload();
+                    }, 500);
+                } else {
+                    alert('清空购物车失败: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('清空购物车时出错:', error);
+            });
+        }
+    });
     // 监听移除按钮点击事件
     removeButton.addEventListener('click', function() {
         // 获取所有选中的复选框
@@ -52,15 +73,32 @@ document.addEventListener('DOMContentLoaded', function() {
             }); 
         }}     
     });
-    // 监听结算按钮点击事件
-    checkoutButton.addEventListener('click', function() {
-        const selectedItems = document.querySelectorAll('.checkbox-input:checked');
-        if (selectedItems.length > 0) {
-            // 这里你可以加入结算逻辑
-            alert('选中的商品已经准备结算。');
-            // 在这里调用结算逻辑，比如向服务器发送请求结算选中的商品
-        } else {
-            alert('请先选择要结算的商品。');
-        }
+    // 监听提交订单按钮点击事件
+    submitButton.addEventListener('click', function() {
+        //获取运输方式
+        const shippingSelect = document.getElementById('shipping');
+        const currentShippingMethod = shippingSelect.value;
+        console.log('当前选中的运输方式是:', currentShippingMethod);
+        fetch('/submit_order', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                shipping_method: currentShippingMethod
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message);
+                // 延迟移除
+                setTimeout(function() {
+                    window.location.reload();
+                }, 500);
+            } else {
+                alert('提交订单失败: ' + data.message);
+            }
+        })
     });
 });

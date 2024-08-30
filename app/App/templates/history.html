@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order History</title>
+    <link rel="stylesheet" href="../static/css/history.css">
+</head>
+<body>
+    <h1>Order History</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Shipping Mode</th>
+                <th>Total Amount</th>
+                <th>Total Weight</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if orders %}
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.OrderID }}</td>
+                <td>{{ order.OrderDate }}</td>
+                <td>{{ order.ShippingMode }}</td>
+                <td>{{ order.TotalAmount }}</td>
+                <td>{{ order.TotalWeight }}</td>
+                <td><a href="{{ url_for('bp.view_order_details', order_id=order.OrderID) }}">View Details</a></td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="6">No orders found</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <button onclick="window.location.href='/index'">Done</button> <!-- Assuming '/' is the main screen -->
+</body>
+</html>

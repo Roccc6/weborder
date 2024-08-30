@@ -15,8 +15,26 @@
     <p>重量: {{ details['ShippingWeight'] }} kg</p>
     <p>{{ details['Description'] }}</p>
     <!-- <button class="btn-add-to-cart">添加到购物车</button> -->
+    <div class="product-reviews">
+        <h2>用户评论</h2>
+        
+        {% if reviews %}
+            <ul class="review-list">
+                {% for review in reviews %}
+                    <li class="review-item">
+                        <h3>{{ review['username'] }}</h3>
+                        <p>{{ review['ReviewText'] }}</p>
+                        <p class="review-date">{{ review['ReviewDate'] }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>目前还没有评论。</p>
+        {% endif %}
+    </div>
     <a href="{{ url_for('bp.index') }}">返回首页</a>
 </div>
+
 
 </body>
 </html>

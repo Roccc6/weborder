@@ -34,7 +34,7 @@
     margin-top: 20px;
 }
 
-.btn-checkout {
+.btn-submit {
     display: inline-block;
     background-color: #ff6600;
     color: white;
@@ -46,7 +46,7 @@
     cursor: pointer;
 }
 
-.btn-checkout:hover {
+.btn-submit:hover {
     background-color: #e65c00;
 }
 
@@ -137,7 +137,7 @@ h1 {
     text-align: right;
 }
 
-.cart-summary .btn-checkout, .btn-add-to-cart {
+.cart-summary .btn-submit, .btn-add-to-cart {
     background-color: #28a745;
     color: white;
     border: none;
@@ -147,7 +147,7 @@ h1 {
     font-size: 16px;
 }
 
-.cart-summary .btn-checkout:hover, .btn-add-to-cart:hover {
+.cart-summary .btn-submit:hover, .btn-add-to-cart:hover {
     background-color: #218838;
 }
 
@@ -231,7 +231,7 @@ h1 {
     text-align: right;
 }
 
-.cart-summary .btn-checkout, .btn-add-to-cart {
+.cart-summary .btn-submit, .btn-add-to-cart {
     background-color: #28a745;
     color: white;
     border: none;
@@ -241,7 +241,7 @@ h1 {
     font-size: 16px;
 }
 
-.cart-summary .btn-checkout:hover, .btn-add-to-cart:hover {
+.cart-summary .btn-submit:hover, .btn-add-to-cart:hover {
     background-color: #218838;
 }
 
@@ -279,3 +279,27 @@ h1 {
     background-color: #d32f2f;
 }
 
+.btn-empty {
+    background-color: #ff4c4c; /* 按钮的背景颜色，红色表示警告/删除 */
+    color: white; /* 字体颜色 */
+    padding: 10px 20px; /* 内边距，增加按钮的点击区域 */
+    border: none; /* 去除默认边框 */
+    border-radius: 5px; /* 圆角边框 */
+    font-size: 16px; /* 字体大小 */
+    font-weight: bold; /* 字体加粗 */
+    cursor: pointer; /* 鼠标指针变为手型，表示可点击 */
+    transition: background-color 0.3s ease; /* 背景颜色变化的过渡效果 */
+}
+
+.btn-empty:hover {
+    background-color: #d43f3f; /* 悬停时背景颜色加深 */
+}
+
+.btn-empty:active {
+    background-color: #b33939; /* 点击时背景颜色更深 */
+}
+
+.btn-empty:focus {
+    outline: none; /* 去掉按钮获得焦点时的默认边框 */
+    box-shadow: 0 0 0 3px rgba(255, 76, 76, 0.5); /* 获得焦点时添加阴影 */
+}

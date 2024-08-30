@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="../static/css/orderdetails.css">
+</head>
+<body>
+    <h1 id="orderid" data-order-id="{{order.OrderID}}">Order Details for Order ID: {{ order.OrderID }}</h1>
+    <p><strong>Order Date:</strong> {{ order.OrderDate }}</p>
+    <p><strong>Shipping Mode:</strong> {{ order.ShippingMode }}</p>
+    <p><strong>Total Amount:</strong> {{ order.TotalAmount }}</p>
+    <p><strong>Total Weight:</strong> {{ order.TotalWeight }}</p>
+
+    <h2>Items in this Order</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Evaluate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.ProductName }}</td>
+                <td>{{ item.Quantity }}</td>
+                <td>
+                    <a href="#" class="review-link" data-item-id="{{ item.ProductID }}" data-item-name="{{ item.ProductName }}">评价</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button onclick="window.location.href='/index'">Done</button> <!-- Assuming this button redirects back to order history -->
+
+    <!-- Hidden review form -->
+    <div id="review-form" class="hidden">
+        <h3>评价 <span id="product-name"></span></h3>
+        <form method="POST" id="review" >
+            <input type="hidden" id="item-id" name="item_id">
+            <label for="comment">评论:</label><br>
+            <textarea id="comment" name="comment" rows="4" required></textarea><br><br>
+
+            <button type="submit">提交评价</button>
+        </form>
+        <button id="cancel-button">取消</button>
+    </div>
+
+    <script src="../static/js/orderdetails.js"></script>
+</body>
+</html>
